@@ -2,15 +2,13 @@
 
 /* START OF COMPILED CODE */
 
-import { BATTLE_ASSET_KEYS, MONSTER_ASSET_KEYS } from "@/assets/asset-key";
+import { MONSTER_ASSET_KEYS } from "@/assets/asset-key";
 import Phaser from "phaser";
 import { SCENE_KEYS } from "../scene-keys";
-import Text from "@/ui/text";
 import { BattleMenu } from "@/battle/ui/menu/battle-menu";
 import { DIRECTION } from "@/common/direction";
 import { Background } from "@/battle/background";
-import { HealthBar } from "@/battle/ui/health-bar";
-import { BattleMonster } from "@/battle/monsters/battle-monster";
+
 import { EnemyBattleMonster } from "@/battle/monsters/enemy-battle-monster";
 import { PlayerBattleMonster } from "@/battle/monsters/player-battle-monster";
 /* START-USER-IMPORTS */
@@ -22,6 +20,8 @@ export default class BattleScene extends Phaser.Scene {
 
     private activeEnemyMonster: EnemyBattleMonster;
     private activePlayerMonster: PlayerBattleMonster;
+
+    private activePlayerAttackIndex: number;
 
     constructor() {
         super({
@@ -36,6 +36,10 @@ export default class BattleScene extends Phaser.Scene {
     /* START-USER-CODE */
 
     // Write your code here
+
+    init() {
+        this.activePlayerAttackIndex = -1;
+    }
 
     create() {
         const background = new Background(this);
@@ -93,6 +97,14 @@ export default class BattleScene extends Phaser.Scene {
                 return;
             }
 
+            this.activePlayerAttackIndex = this.battleMenu.selectedAttack;
+
+            if (
+                !this.activePlayerMonster.attacks[this.activePlayerAttackIndex]
+            ) {
+                return;
+            }
+
             this.battleMenu.hideMonsterAttackSubMenu();
             // this.battleMenu.updateInfoPaneMessagesAndWaitForInput(
             //     ["Your monster attacks the enemy"],
@@ -124,7 +136,49 @@ export default class BattleScene extends Phaser.Scene {
         }
     }
 
-    private handleBattleSequence() {}
+    private handleBattleSequence() {
+        // general battle flow
+        // show attack used, brief pause
+        // then play attack animation, brief pause
+        // then play damage animation, brief pause
+        // then play health bar animation, brief pause
+        // then repeat the steps above for the other monster
+
+        // handle it
+
+        this.playAttack();
+    }
+
+    private playAttack() {
+        this.battleMenu.updateInfoPaneMessagesAndWaitForInput(
+            [
+                `${this.activePlayerMonster.name} used ${this.activePlayerMonster.attacks[0].name}`,
+            ],
+            () => {
+                this.time.delayedCall(500, () => {
+                    console.log("take it");
+                    this.activeEnemyMonster.takeDamage(20, () => {
+                        this.enemyAttack();
+                    });
+                });
+            }
+        );
+    }
+
+    private enemyAttack() {
+        this.battleMenu.updateInfoPaneMessagesAndWaitForInput(
+            [
+                `${this.activeEnemyMonster.name} used ${this.activeEnemyMonster.attacks[0].name}`,
+            ],
+            () => {
+                this.time.delayedCall(500, () => {
+                    this.activePlayerMonster.takeDamage(20, () => {
+                        this.battleMenu.showMainBattleMenu();
+                    });
+                });
+            }
+        );
+    }
 
     /* END-USER-CODE */
 }
@@ -132,4 +186,3 @@ export default class BattleScene extends Phaser.Scene {
 /* END OF COMPILED CODE */
 
 // You can write more code here
-
