@@ -1,0 +1,73 @@
+{
+    "section1": {
+        "files": [
+            {
+                "url": "assets/data/attacks.json",
+                "type": "json",
+                "key": "ATTACKS"
+            },
+            {
+                "url": "assets/images/monster-tamer/monsters/carnodusk.png",
+                "type": "image",
+                "key": "CARNODUSK"
+            },
+            {
+                "url": "assets/images/monster-tamer/ui/cursor.png",
+                "type": "image",
+                "key": "CURSOR"
+            },
+            {
+                "url": "assets/images/monster-tamer/battle-backgrounds/forest-background.png",
+                "type": "image",
+                "key": "FOREST"
+            },
+            {
+                "url": "assets/images/kenneys-assets/ui-space-expansion/custom-ui.png",
+                "type": "image",
+                "key": "HEALTH_BAR_BACKGROUND"
+            },
+            {
+                "url": "assets/images/monster-tamer/monsters/iguanignite.png",
+                "type": "image",
+                "key": "IGUANIGNITE"
+            },
+            {
+                "url": "assets/images/kenneys-assets/ui-space-expansion/barHorizontal_green_left.png",
+                "type": "image",
+                "key": "LEFT_CAP"
+            },
+            {
+                "url": "assets/images/kenneys-assets/ui-space-expansion/barHorizontal_shadow_left.png",
+                "type": "image",
+                "key": "LEFT_CAP_SHADOW"
+            },
+            {
+                "url": "assets/images/kenneys-assets/ui-space-expansion/barHorizontal_green_mid.png",
+                "type": "image",
+                "key": "MIDDLE"
+            },
+            {
+                "url": "assets/images/kenneys-assets/ui-space-expansion/barHorizontal_shadow_mid.png",
+                "type": "image",
+                "key": "MIDDLE_SHADOW"
+            },
+            {
+                "url": "assets/images/kenneys-assets/ui-space-expansion/barHorizontal_green_right.png",
+                "type": "image",
+                "key": "RIGHT_CAP"
+            },
+            {
+                "url": "assets/images/kenneys-assets/ui-space-expansion/barHorizontal_shadow_right.png",
+                "type": "image",
+                "key": "RIGHT_CAP_SHADOW"
+            }
+        ]
+    },
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2,
+        "showAllFilesInBlocks": false
+    }
+}
